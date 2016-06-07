@@ -1,5 +1,5 @@
 var mongoose = require('mongoose'),
-    owl = require('owl-deepcopy');
+    deepcopy = require('deepcopy');
 
 var Schema = mongoose.Schema,
     Model = mongoose.Model;
@@ -9,7 +9,7 @@ var Schema = mongoose.Schema,
  */
 Schema.prototype.extend = function(obj, options) {
   // Deep clone the existing schema so we can add without changing it
-  var newSchema = owl.deepCopy(this);
+  var newSchema = deepCopy(this);
 
   // Fix for callQueue arguments, todo: fix clone implementation
   newSchema.callQueue.forEach(function(k) {
@@ -77,4 +77,13 @@ Model.prototype.init = function(doc, query, fn) {
 
   // If theres no discriminatorKey we can just call the original method
   return oldInit.apply(this, arguments);
+}
+this, doc, query, newFn);
+            obj.__proto__ = model.prototype;
+            return obj;
+        }
+    }
+
+    // If theres no discriminatorKey we can just call the original method
+    return oldInit.apply(this, arguments);
 }
